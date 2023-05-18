@@ -1,0 +1,11 @@
+{#<h1 class="my-4">Store</h1>#}
+<h1 class="mb-0 mt-4">
+    <a href="{% url 'products:index' %}" class="btn btn-primary bg-dark btn-block ">Категории</a>
+</h1>
+<div class="list-group">
+    {% for category in categories %}
+        <a href="{% url 'products:category' category.id %}" class="list-group-item list-group-item-action">
+            {{ category.name }}
+        </a>
+    {% endfor %}
+</div>
