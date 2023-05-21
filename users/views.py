@@ -1,15 +1,15 @@
-from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
 
-from .models import User, EmailVerification
-from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm
-from products.models import Basket
 from common.views import TitleMixin
+
+from .forms import UserLoginForm, UserProfileForm, UserRegistrationForm
+from .models import EmailVerification, User
 
 
 class UserLoginView(TitleMixin, LoginView):
@@ -38,7 +38,7 @@ class UserProfileView(LoginRequiredMixin, TitleMixin, UpdateView):
         return super().get(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse_lazy('users:profile', args=(self.object.id, ))
+        return reverse_lazy('users:profile', args=(self.object.id,))
 
 
 class UserEmailVerificationView(TitleMixin, TemplateView):
@@ -54,9 +54,3 @@ class UserEmailVerificationView(TitleMixin, TemplateView):
             user.save()
             return super(UserEmailVerificationView, self).get(request, *args, **kwargs)
         return redirect(to='index')
-
-
-
-
-
-
