@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-5l!*w44!fn$pm!1c(^97hzvlvx-^*p&t#ceyx%^f^v_mrav^c)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+DOMAIN_NAME = 'http://localhost:8000'
 
 
 # Application definition
@@ -68,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'products.context_processors.baskets',
             ],
         },
     },
@@ -140,7 +142,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Users
 
 AUTH_USER_MODEL = 'users.User'
-
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
+
+
+# Sending email
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'test-verify-email@yandex.ru' #почта отправки
+EMAIL_HOST_PASSWORD = 'wwmntqeowfhfangj'
+EMAIL_USE_SSL = True
