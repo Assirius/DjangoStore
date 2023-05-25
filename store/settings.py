@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
 
+    "debug_toolbar",
     'django_extensions',
 
     'products.apps.ProductsConfig',
@@ -58,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'store.urls'
@@ -80,6 +84,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'store.wsgi.application'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+    'localhost'
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -151,11 +160,11 @@ LOGOUT_REDIRECT_URL = 'index'
 
 # Sending email
 
-# EMAIL_HOST = 'smtp.yandex.ru'
-# EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'test-verify-email@yandex.ru'  # почта отправки
-# EMAIL_HOST_PASSWORD = 'wwmntqeowfhfangj'
-# EMAIL_USE_SSL = True
+# EMAIL_HOST = env.EMAIL_HOST
+# EMAIL_PORT = env.EMAIL_PORT
+# EMAIL_HOST_USER = env.EMAIL_HOST_USER  # почта отправки
+# EMAIL_HOST_PASSWORD = env.EMAIL_HOST_PASSWORD
+# EMAIL_USE_SSL = env.EMAIL_USE_SSL
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # OAuth
