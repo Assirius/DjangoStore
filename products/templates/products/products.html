@@ -1,5 +1,5 @@
 {% extends 'products/base.html' %}
-{% load static %}
+{% load static cache %}
 
 
 {% block css %}
@@ -49,31 +49,33 @@
                 </div>
 
                 <div class="row">
-                    {% for product in products %}
-                        <div class="col-lg-4 col-md-6 mb-4">
-                            <div class="card h-100">
-                                <a href="#">
-                                    <img class="card-img-top"
-                                         src="{{ product.image.url }}"
-                                         alt="">
-                                </a>
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        <a href="#">{{ product.name }}</a>
-                                    </h4>
-                                    <h5>{{ product.price }} руб.</h5>
-                                    <p class="card-text">{{ product.description }}</p>
-                                </div>
-                                <div class="card-footer text-center">
-                                    <a href="{% url 'products:basket-add' product.id %}">
-                                        <button type="button" class="btn btn-outline-success">
-                                            Отправить в корзину
-                                        </button>
+                    {% cache 60 products page_obj.number category_id %}
+                        {% for product in products %}
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100">
+                                    <a href="#">
+                                        <img class="card-img-top"
+                                             src="{{ product.image.url }}"
+                                             alt="">
                                     </a>
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            <a href="#">{{ product.name }}</a>
+                                        </h4>
+                                        <h5>{{ product.price }} руб.</h5>
+                                        <p class="card-text">{{ product.description }}</p>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <a href="{% url 'products:basket-add' product.id %}">
+                                            <button type="button" class="btn btn-outline-success">
+                                                Отправить в корзину
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% endcache %}
                 </div>
 
                 <nav aria-label="Page navigation example">
