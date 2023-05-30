@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import env
+import my_env
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -90,17 +91,27 @@ INTERNAL_IPS = [
     'localhost'
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'store_db',
-        'USER': 'store_username',
-        'PASSWORD': 'store_password',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': my_env.NAME,
+        'USER': my_env.USER,
+        'PASSWORD': my_env.PASSWORD,
+        'HOST': my_env.HOST,
+        'PORT': my_env.PORT,
     }
 }
 
@@ -160,12 +171,12 @@ LOGOUT_REDIRECT_URL = 'index'
 
 # Sending email
 
-# EMAIL_HOST = env.EMAIL_HOST
-# EMAIL_PORT = env.EMAIL_PORT
-# EMAIL_HOST_USER = env.EMAIL_HOST_USER  # почта отправки
-# EMAIL_HOST_PASSWORD = env.EMAIL_HOST_PASSWORD
-# EMAIL_USE_SSL = env.EMAIL_USE_SSL
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = my_env.EMAIL_HOST
+EMAIL_PORT = my_env.EMAIL_PORT
+EMAIL_HOST_USER = my_env.EMAIL_HOST_USER  # почта отправки
+EMAIL_HOST_PASSWORD = my_env.EMAIL_HOST_PASSWORD
+EMAIL_USE_SSL = my_env.EMAIL_USE_SSL
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # OAuth
 
@@ -186,3 +197,8 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
     }
 }
+
+# Celery
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
