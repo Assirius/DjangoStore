@@ -39,16 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.humanize',
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
 
-    "debug_toolbar",
+    'debug_toolbar',
     'django_extensions',
 
     'products.apps.ProductsConfig',
+    'orders.apps.OrdersConfig',
     'users.apps.UsersConfig',
 
 ]
