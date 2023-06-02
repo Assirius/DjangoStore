@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import my_env
 
+import my_env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-5l!*w44!fn$pm!1c(^97hzvlvx-^*p&t#ceyx%^f^v_mrav^c)
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-DOMAIN_NAME = 'http://localhost:8000'
+DOMAIN_NAME = 'http://127.0.0.1:8000'
 
 # Application definition
 
@@ -204,3 +204,10 @@ SOCIALACCOUNT_PROVIDERS = {
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+
+
+# Stripe
+
+STRIPE_PUBLIC_KEY = my_env.STRIPE_PUBLIC_KEY
+STRIPE_SECRET_KEY = my_env.STRIPE_SECRET_KEY
+STRIPE_WEBHOOK_SECRET = my_env.STRIPE_WEBHOOK_SECRET
