@@ -28,10 +28,10 @@ pip install venv
 1. Перейдите в корневую папку проекта.
 
 2. Активируйте виртуальное окружение venv следующей командой:
-**source venv/bin/activate**
+# **source venv/bin/activate**
  
   или для Windows:
-**venv\Scripts\activate**
+# **venv\Scripts\activate**
 
 3. Установите зависимости, указанные в файле requirements.txt, выполнив следующую команду:
 **pip install -r requirements.txt**
@@ -41,8 +41,8 @@ pip install venv
 **python manage.py migrate**
 
 5. Загрузите фикстуры:
- **python manage.py loaddata products/fixtures/categories.json**
- **python manage.py loaddata products/fixtures/goods.json**
+ # **python manage.py loaddata products/fixtures/categories.json**
+ # **python manage.py loaddata products/fixtures/goods.json**
 
 6. Создайте файл .env на основе файла env.template и обновите необходимые переменные окружения.
    **python manage.py runserver**
