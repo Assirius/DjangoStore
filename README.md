@@ -28,10 +28,10 @@ pip install venv
 1. Перейдите в корневую папку проекта.
 
 2. Активируйте виртуальное окружение venv следующей командой:
- **source venv/bin/activate**
+ - **source venv/bin/activate**
  
-  или для Windows:
-# **venv\Scripts\activate**
+ - или для Windows:
+ **venv\Scripts\activate**
 
 3. Установите зависимости, указанные в файле requirements.txt, выполнив следующую команду:
 **pip install -r requirements.txt**
