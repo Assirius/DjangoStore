@@ -56,7 +56,10 @@ python manage.py loaddata products/fixtures/categories.json
 python manage.py loaddata products/fixtures/goods.json
 ```
 
-**6. Создайте файл .env на основе файла env.template и обновите необходимые переменные окружения.**
+**6. Заполнение .env**
+- В корневой папке проекта создайте файл с названием `.env`.
+- Скопируйте содержимое файла `.env.template` в созданный файл `.env`.
+- Заполните значения переменных окружения в файле `.env` в соответствии с вашими настройками.
 
 ___
 ## Запуск сервера
